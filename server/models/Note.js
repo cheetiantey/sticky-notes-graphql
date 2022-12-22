@@ -9,4 +9,5 @@ const NoteSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Note", NoteSchema);
+// Mongoose will turn "Note" into "notes" and try to find it in MDB
+module.exports = mongoose.model("Note", NoteSchema); 
