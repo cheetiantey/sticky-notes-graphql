@@ -1,28 +1,23 @@
 import { FaTrash } from "react-icons/fa";
 import { TiSpanner } from "react-icons/ti";
 import { useMutation } from "@apollo/client";
-// import { DELETE_NOTE } from "../mutation/noteMutations";
+import { DELETE_NOTE } from "../mutation/noteMutations";
 import { GET_NOTES } from "../queries/noteQueries";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
 export default function Note({ note }) {
-    // const [deleteClient] = useMutation(DELETE_CLIENT, {
-    //     variables: { id: client.id },
-    //     update(cache, {data: {deleteClient}}) {
-    //       const { clients } = cache.readQuery({ query: GET_CLIENTS});
-    //       cache.writeQuery({
-    //         query: GET_CLIENTS,
-    //         data: { clients: clients.filter(client => client.id !== deleteClient.id)}
-    //       })
-    //     }
-    //   });
-
-    const deleteNote = () => {
-        // TODO: Implement the actual deletion function
-        console.log("Deleting a note");
-    }
+    const [deleteNote] = useMutation(DELETE_NOTE, {
+        variables: { id: note.id },
+        update(cache, {data: {deleteNote}}) {
+          const { notes } = cache.readQuery({ query: GET_NOTES});
+          cache.writeQuery({
+            query: GET_NOTES,
+            data: { notes: notes.filter(note => note.id !== deleteNote.id)}
+          })
+        }
+      });
 
   return (
     <>
