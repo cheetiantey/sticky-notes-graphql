@@ -8,24 +8,13 @@ export default function Notes() {
 
     if (loading) return <Spinner />;
     if (error) return <p>An error occurred while fetching notes from MongoDB</p>;
-
+      
     return (
         <>
-            {!loading && !error &&
-                <table className="table table-hover mt-3">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.notes.map(note => (
-                            <Note key={note.id} note={note} />
-                        ))}
-                    </tbody>
-                </table>
+            {!loading && !error && 
+                data.notes.map(note => (
+                    <Note key={note.id} note={note} />
+                ))
             }
         </>
     )

@@ -1,7 +1,11 @@
 import { FaTrash } from "react-icons/fa";
+import { TiSpanner } from "react-icons/ti";
 import { useMutation } from "@apollo/client";
 // import { DELETE_NOTE } from "../mutation/noteMutations";
 import { GET_NOTES } from "../queries/noteQueries";
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 
 export default function Note({ note }) {
     // const [deleteClient] = useMutation(DELETE_CLIENT, {
@@ -15,17 +19,29 @@ export default function Note({ note }) {
     //     }
     //   });
 
+    const deleteNote = () => {
+        // TODO: Implement the actual deletion function
+        console.log("Deleting a note");
+    }
+
   return (
     <>
-        <tr>
-            <td>{note.name}</td>
-            <td>{note.description}</td>
-            {/* <td>
-                <button className="btn btn-danger btn-sm" onClick={deleteNote}>
-                    <FaTrash />
-                </button>
-            </td> */}
-        </tr>
+        <Card style={{ width: '18rem'}}>
+        <Card.Body>
+            <Card.Title>{note.name}</Card.Title>
+            <Card.Text>
+                {note.description}
+            </Card.Text>
+            <Button variant="info">
+                <TiSpanner />
+                Edit
+            </Button>
+            <Button variant="danger" onClick={deleteNote}>
+                <FaTrash />
+                Delete
+            </Button>
+        </Card.Body>
+        </Card>
     </>
   )
 }
