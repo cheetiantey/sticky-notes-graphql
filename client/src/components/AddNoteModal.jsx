@@ -6,7 +6,7 @@ import { GET_NOTES } from "../queries/noteQueries";
 
 export default function AddNoteModal() {
     const [name, setName] = useState('');
-    const [description, setEmail] = useState('');
+    const [description, setDescription] = useState('');
 
     const [addNote] = useMutation(ADD_NOTE, {
         variables: {name, description},
@@ -28,6 +28,10 @@ export default function AddNoteModal() {
         }
 
         addNote(name, description);
+
+        // Clear the states of the modal after adding the note
+        setName("");
+        setDescription("");
     };
 
     return (
@@ -54,7 +58,7 @@ export default function AddNoteModal() {
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Description</label>
-                            <input type="text" className="form-control" id="name" value={description} onChange={(e) => setEmail(e.target.value)} />
+                            <input type="text" className="form-control" id="name" value={description} onChange={(e) => setDescription(e.target.value)} />
                         </div>
 
                         <button type="submit" className="btn btn-success" data-bs-dismiss="modal">Submit</button>
