@@ -24,21 +24,21 @@ export default function Note({ note }) {
   return (
     <>
         <UpdateNoteModal noteId={note.id} />
-        <Card style={{ width: '18rem'}}>
-        <Card.Body>
-            <Card.Title>{note.name}</Card.Title>
-            <Card.Text>
-                {note.description}
-            </Card.Text>
-            <Button variant="info"  data-bs-toggle="modal" data-bs-target={modalId}>
-                <TiSpanner />
-                Edit
-            </Button>
-            <Button variant="danger" onClick={deleteNote}>
-                <FaTrash />
-                Delete
-            </Button>
-        </Card.Body>
+        <Card style={{ width: '24rem'}} bg="warning">
+            <Card.Body>
+                <Card.Title>{note.name}</Card.Title>
+                <Card.Text>
+                    {note.description}
+                </Card.Text>
+                <Button variant="info"  data-bs-toggle="modal" data-bs-target={modalId}>
+                    <TiSpanner />
+                    Edit
+                </Button>
+                <Button variant="danger" onClick={deleteNote}>
+                    <FaTrash />
+                    Delete
+                </Button>
+            </Card.Body>
         </Card>
     </>
   )

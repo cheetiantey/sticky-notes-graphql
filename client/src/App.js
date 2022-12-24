@@ -1,3 +1,4 @@
+import Header from "./components/Header";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import Notes from "./components/Notes"
 import AddNoteModal from "./components/AddNoteModal";
@@ -30,10 +31,11 @@ function App() {
   return (
     <>
       <ApolloProvider client={note}>
-      <div className='container'>
-        <AddNoteModal />
-        <Notes />
-      </div>
+        <div className='container'>
+          <Header />
+          <AddNoteModal />
+          <Notes />
+        </div>
       </ApolloProvider>
     </>
   );
