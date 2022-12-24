@@ -4,8 +4,11 @@ import { UPDATE_NOTE } from "../mutation/noteMutations";
 import { GET_NOTES } from "../queries/noteQueries";
 
 export default function UpdateNoteModal({ noteId }) {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
+    // Setting the initial states to "undefined" as sending "undefined" to GraphQL would not 
+    // change its value (in other words, the value that it currently has is preserved)
+    // whereas sending an empty string to GraphQL would replace the value (with an empty string)
+    const [name, setName] = useState(undefined);
+    const [description, setDescription] = useState(undefined);
 
     const [updateNote] = useMutation(UPDATE_NOTE, {
         variables: {id: noteId, name, description},
@@ -23,8 +26,8 @@ export default function UpdateNoteModal({ noteId }) {
         updateNote(name, description);
 
         // Clear the states of the modal after adding the note
-        setName("");
-        setDescription("");
+        setName(undefined);
+        setDescription(undefined);
     };
 
     const modalId = "updateNoteModal" + noteId;
@@ -41,11 +44,11 @@ export default function UpdateNoteModal({ noteId }) {
                     <form onSubmit={onSubmit}>
                         <div className="mb-3">
                             <label className="form-label">Name</label>
-                            <input type="text" className="form-control" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+                            <input type="text" className="form-control" id="name" value={name || ""} onChange={(e) => setName(e.target.value)} />
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Description</label>
-                            <input type="text" className="form-control" id="name" value={description} onChange={(e) => setDescription(e.target.value)} />
+                            <input type="text" className="form-control" id="name" value={description || ""} onChange={(e) => setDescription(e.target.value)} />
                         </div>
 
                         <button type="submit" className="btn btn-success" data-bs-dismiss="modal">Submit</button>
