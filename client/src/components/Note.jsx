@@ -5,6 +5,7 @@ import { DELETE_NOTE } from "../mutation/noteMutations";
 import { GET_NOTES } from "../queries/noteQueries";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import UpdateNoteModal from "./UpdateNoteModal";
 
 
 export default function Note({ note }) {
@@ -18,16 +19,18 @@ export default function Note({ note }) {
           })
         }
       });
-
+    
+    const modalId = "#updateNoteModal" + note.id;
   return (
     <>
+        <UpdateNoteModal noteId={note.id} />
         <Card style={{ width: '18rem'}}>
         <Card.Body>
             <Card.Title>{note.name}</Card.Title>
             <Card.Text>
                 {note.description}
             </Card.Text>
-            <Button variant="info">
+            <Button variant="info"  data-bs-toggle="modal" data-bs-target={modalId}>
                 <TiSpanner />
                 Edit
             </Button>

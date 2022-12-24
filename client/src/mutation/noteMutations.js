@@ -20,6 +20,14 @@ const DELETE_NOTE = gql`
     }
 `;
 
-// TODO: Implement UPDATE_NOTE function
+const UPDATE_NOTE = gql`
+    mutation updateNote($id: ID!, $name: String, $description: String) {
+        updateNote(id: $id, name: $name, description: $description) {
+            id
+            name
+            description
+        }
+    }
+`;
 
-export { ADD_NOTE, DELETE_NOTE };
+export { ADD_NOTE, DELETE_NOTE, UPDATE_NOTE };

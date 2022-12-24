@@ -60,8 +60,28 @@ const mutation = new GraphQLObjectType({
             resolve(parent, args) {
                 return Note.findByIdAndRemove(args.id);
             }
+        },
+        // Update a note
+        updateNote: {
+            type: NoteType,
+            args: {
+                id: { type: new GraphQLNonNull(GraphQLID) },
+                name: { type: GraphQLString },
+                description: { type: GraphQLString }
+            },
+            resolve(parent, args) {
+                return Note.findByIdAndUpdate(
+                    args.id,
+                    {
+                        $set: {
+                            name: args.name,
+                            description: args.description
+                        }
+                    },
+                    { new: true } // If it's not there, it'll create a new project
+                )
+            }
         }
-        // TODO: Write an "Update note" function
     }
 });
 
