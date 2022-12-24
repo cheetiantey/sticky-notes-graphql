@@ -22,7 +22,6 @@ export default function UpdateNoteModal({ noteId }) {
             return alert("Please fill up at least one field");
         }
 
-        console.log(name, description, noteId);
         updateNote(name, description);
 
         // Clear the states of the modal after adding the note
